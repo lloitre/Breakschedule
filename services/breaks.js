@@ -12,7 +12,10 @@ function addBreak(employeeId, startTime, endTime) {
     return db.run(
         'INSERT INTO breaks (employee_id, start_time, end_time) VALUES (?, ?, ?)',
         [employeeId, startTime, endTime]
-    );
+    ).catch(err => {
+        console.error('Error adding break:', err);
+        throw new Error('Failed to add break');
+    });
 }
 
 function deleteBreak(breakId, employeeId) {
@@ -23,7 +26,10 @@ function deleteBreak(breakId, employeeId) {
     return db.run(
         'DELETE FROM breaks WHERE id = ? AND employee_id = ?',
         [breakId, employeeId]
-    );
+    ).catch(err => {
+        console.error('Error deleting break:', err);
+        throw new Error('Failed to delete break');
+    });
 }
 
 function getBreaksByTimeRange(startTime, endTime) {
@@ -49,11 +55,14 @@ function getBreaksByTimeRange(startTime, endTime) {
          WHERE start_time >= ? AND end_time <= ?
          ORDER BY start_time`,
         [start.toISOString(), end.toISOString()]
-    );
+    ).catch(err => {
+        console.error('Error fetching breaks:', err);
+        throw new Error('Failed to fetch breaks');
+    });
 }
 
 module.exports = {
     addBreak,
     deleteBreak,
     getBreaksByTimeRange
-} 
+}; 
