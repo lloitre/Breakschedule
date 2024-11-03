@@ -1,0 +1,42 @@
+:root {
+  /* Light theme colors */
+  --background-light: #ffffff;
+  --text-light: #1f2023;
+  --primary-light: #586F7C;
+  --secondary-light: #DBE7E4;
+  
+  /* Image adjustments */
+  --image-grayscale: 0;
+  --image-opacity: 100%;
+}
+
+:root.dark-mode {
+  /* Dark theme colors */
+  --background-dark: #1f2023;
+  --text-dark: #ffffff;
+  --primary-dark: #2F4550;
+  --secondary-dark: #586F7C;
+  
+  /* Image adjustments for dark mode */
+  --image-grayscale: 50%;
+  --image-opacity: 90%;
+}
+
+/* Apply theme variables */
+body {
+  background-color: var(--background-light);
+  color: var(--text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Image handling in dark mode */
+img,
+video {
+  filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+} 
